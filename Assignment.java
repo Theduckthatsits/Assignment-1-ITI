@@ -34,12 +34,18 @@ public class Assignment {
 
 		// your code goes there
 
+          LinearRegression linearRegression = new LinearRegression(1000);
+          
+          // Displaying Results on graph
+          Display graph = new Display(linearRegression);
+          graph.update();
+
 	}
 
 
 	public static void main(String[] args) {
 
-	    StudentInfo.display();
+	     StudentInfo.display();
 
 		System.out.println("randomLine");
 		randomLine();

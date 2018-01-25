@@ -37,7 +37,6 @@ public class LinearRegression {
 	private int currentNbreOfSamples;
 
 
-
 	/** 
      * counts how many iterations have been performed
      */
@@ -56,6 +55,14 @@ public class LinearRegression {
 
  		// your code goes there
 
+ 		nbreOfSamples=m;
+ 		theta0=0;
+ 		theta1=0;
+
+
+
+
+
 	}
 
 	/** 
@@ -70,6 +77,17 @@ public class LinearRegression {
 	public void addSample(double x, double y){
 
 		// your code goes there
+
+		// Initiating samples array with an array the size of the number of samples passed to the constructor
+		samples = new double[nbreOfSamples];
+
+		// Adds the new point to the list samples cointaining all the points
+		samples.add(new Point(x, y));
+
+
+
+
+
 	}
 
 	/** 
@@ -80,6 +98,8 @@ public class LinearRegression {
 	 */
 	private double hypothesis(double x){
 		// your code goes there
+
+		return theta0+theta1*x;
 	}
 
 	/** 
@@ -90,6 +110,8 @@ public class LinearRegression {
 	public String currentHypothesis(){
 
 		// your code goes there
+
+		return "Current hypothesis: " + theta0 + "+" + theta1 + "x";
 	}
 
 	/** 
@@ -99,7 +121,21 @@ public class LinearRegression {
 	 */
 	public double currentCost(){
 		// your code goes there
-	}
+
+		double cost=0;
+
+		for (int i=0; i<nbreOfSamples; i++) {
+			
+			cost += Math.pow(hypothesis(samples[i][0])-samples[i][1],2);
+			
+		}
+
+		return (1/nbreOfSamples)*cost;
+
+
+
+		
+	}	
 
 	/** 
      * runs several iterations of the gradient descent algorithm
@@ -112,10 +148,47 @@ public class LinearRegression {
 
 
 		// your code goes there
+
+		// NEED TO IMPLEMENT numberofSteps
+		// Variables...
+		double t0,t1,temp = 0;
+		int completedSteps = 0;
+
+		while(completedSteps<=numberOfSteps){
+
+			// Calculates the sum of (h◊(xi) - yi) for theta zero and ((h◊(xi) - yi)xi) for theta one
+			for (int i=0; i<nbreOfSamples; i++) {
+
+				temp = hypothesis(samples[i][0])-samples[i][1];
+
+				t0 += temp;
+
+				t1 += temp*samples[i][0];
+
+				temp = 0;
+
+			}
+
+			// Updating the value of THETA ZERO
+			theta0 -= ((alpha*2)/nbreOfSamples)*t0;
+
+			// Updating the value of THETA ONE
+			theta1 -= ((alpha*2)/nbreOfSamples)*t1;
+
+			// Increasing the number of comnpleted steps
+			completedSteps++;
+
+		}
+
 		
+
+
+
+
+
+
+
 	}
-
-
 
 	/** 
      * Getter for theta0
@@ -125,6 +198,8 @@ public class LinearRegression {
 
 	public double getTheta0(){
 		// your code goes there
+
+		return theta0;
 	}
 
 	/** 
@@ -135,6 +210,8 @@ public class LinearRegression {
 
 	public double getTheta1(){
 		// your code goes there
+
+		return theta1;
 	}
 
 	/** 
@@ -145,6 +222,8 @@ public class LinearRegression {
 
 	public double[] getSamples(){
 		// your code goes there
+
+		return samples;
 	}
 
 	/** 
@@ -155,6 +234,8 @@ public class LinearRegression {
 
 	public double[] getSamplesValues(){
 		// your code goes there
+
+		return samplesValues;
 	}
 
 	/** 
@@ -165,5 +246,7 @@ public class LinearRegression {
 
 	public int getIteration(){
 		// your code goes there
+
+		return iteration;
 	}
 }

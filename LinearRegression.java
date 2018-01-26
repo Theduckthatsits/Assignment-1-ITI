@@ -54,14 +54,19 @@ public class LinearRegression {
  	public LinearRegression(int m){
 
  		// your code goes there
-
+ 		// 
  		nbreOfSamples=m;
+
+ 		// Initializing initial hypothesis
  		theta0=0;
  		theta1=0;
 
+ 		// Initializing the lists samples and samplesValues to lists of size 0
+ 		samples = new double[0];
+		samplesValues = new double[0];
 
-
-
+		// Initializing the number of iterations to zero
+		iterations=0;
 
 	}
 
@@ -78,15 +83,16 @@ public class LinearRegression {
 
 		// your code goes there
 
-		// Initiating samples array with an array the size of the number of samples passed to the constructor
-		samples = new double[nbreOfSamples];
+		// Variable newSize is initiated to the new length of lists sample and samplesValue (which are the same size)
+		int newSize = samples.length+1;
 
-		// Adds the new point to the list samples cointaining all the points
-		samples.add(new Point(x, y));
+		// Creating new arrays of the new size and assigning them to the lists samples and samplesValues
+		samples = new double[newSize];
+		samplesValues = new double[newSize];
 
-
-
-
+		// Adds the x and y values of the point passed to method addSample to the list samples and samplesValues respectively
+		samples[newSize-1] = x;
+		samplesValues[newSize-1] = y;
 
 	}
 
@@ -122,18 +128,18 @@ public class LinearRegression {
 	public double currentCost(){
 		// your code goes there
 
-		double cost=0;
+		// Variable used to store the sum of (h◊(xi)-yi)^2
+		double cost = 0;
 
+		// For loop used to calculate the sum of (h◊(xi)-yi)^2
 		for (int i=0; i<nbreOfSamples; i++) {
 			
-			cost += Math.pow(hypothesis(samples[i][0])-samples[i][1],2);
+			cost += Math.pow(hypothesis(samples[i])-samplesValues[i],2);
 			
 		}
 
+		// Returning the current cost of the function	
 		return (1/nbreOfSamples)*cost;
-
-
-
 		
 	}	
 
@@ -159,11 +165,11 @@ public class LinearRegression {
 			// Calculates the sum of (h◊(xi) - yi) for theta zero and ((h◊(xi) - yi)xi) for theta one
 			for (int i=0; i<nbreOfSamples; i++) {
 
-				temp = hypothesis(samples[i][0])-samples[i][1];
+				temp = hypothesis(samples[i])-samplesValues[i];
 
 				t0 += temp;
 
-				t1 += temp*samples[i][0];
+				t1 += temp*samples[i];
 
 				temp = 0;
 

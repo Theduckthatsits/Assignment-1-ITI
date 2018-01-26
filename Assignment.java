@@ -34,9 +34,11 @@ public class Assignment {
           }
 
           Display graph = new Display(linearRegression);
+          //graph.setTarget(1,0); //Optional
 
           for (int x=0; x<50; x++) {
-
+               
+               System.out.println(linearRegression.currentCost());
                linearRegression.gradientDescent(0.000000003, 100);
                graph.update();
 

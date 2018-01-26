@@ -55,7 +55,7 @@ public class LinearRegression {
 
  		// your code goes there
  		// 
- 		nbreOfSamples=m;
+ 		this.nbreOfSamples=m;
 
  		// Initializing initial hypothesis
  		theta0=0;
@@ -82,17 +82,30 @@ public class LinearRegression {
 	public void addSample(double x, double y){
 
 		// your code goes there
+		// HAVE TO CLONE THE LIST 
 
 		// Variable newSize is initiated to the new length of lists sample and samplesValue (which are the same size)
 		int newSize = samples.length+1;
 
 		// Creating new arrays of the new size and assigning them to the lists samples and samplesValues
-		samples = new double[newSize];
-		samplesValues = new double[newSize];
+		double[] samples1 = new double[newSize];
+		double[] samplesValues1 = new double[newSize];
+
+		// Copying the old array to the new temporary array
+		System.arraycopy(samples, 0, samples1, 0, samples.length);
+		System.arraycopy(samplesValues, 0, samplesValues1, 0, samplesValues.length);
+
 
 		// Adds the x and y values of the point passed to method addSample to the list samples and samplesValues respectively
-		samples[newSize-1] = x;
-		samplesValues[newSize-1] = y;
+		samples1[newSize-1] = x;
+		samplesValues1[newSize-1] = y;
+		samples=samples1;
+		samplesValues=samplesValues1;
+
+
+
+
+
 
 	}
 
@@ -155,7 +168,6 @@ public class LinearRegression {
 
 		// your code goes there
 
-		// NEED TO IMPLEMENT numberofSteps
 		// Variables...
 		double t0= 0;
 		double t1=0;
@@ -174,6 +186,7 @@ public class LinearRegression {
 				t1 += temp*samples[i];
 
 				temp = 0;
+				//iteration++;
 
 			}
 
@@ -190,8 +203,6 @@ public class LinearRegression {
 		}
 
 		
-
-
 
 
 

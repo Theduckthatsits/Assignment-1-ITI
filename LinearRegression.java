@@ -66,7 +66,7 @@ public class LinearRegression {
 		samplesValues = new double[0];
 
 		// Initializing the number of iterations to zero
-		iterations=0;
+		iteration=0;
 
 	}
 
@@ -117,7 +117,7 @@ public class LinearRegression {
 
 		// your code goes there
 
-		return "Current hypothesis: " + theta0 + "+" + theta1 + "x";
+		return theta0 + " + " + theta1 + " x";
 	}
 
 	/** 
@@ -157,10 +157,12 @@ public class LinearRegression {
 
 		// NEED TO IMPLEMENT numberofSteps
 		// Variables...
-		double t0,t1,temp = 0;
+		double t0= 0;
+		double t1=0;
+		double temp=0;
 		int completedSteps = 0;
 
-		while(completedSteps<=numberOfSteps){
+		while(completedSteps<numberOfSteps){
 
 			// Calculates the sum of (h◊(xi) - yi) for theta zero and ((h◊(xi) - yi)xi) for theta one
 			for (int i=0; i<nbreOfSamples; i++) {
@@ -183,6 +185,7 @@ public class LinearRegression {
 
 			// Increasing the number of comnpleted steps
 			completedSteps++;
+			iteration++;
 
 		}
 

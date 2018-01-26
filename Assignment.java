@@ -10,9 +10,6 @@
 public class Assignment {
 
 
-
-     
-
      /** 
      * In this first method, we are simply using sample points that are
      * on a straight line, namely y = x;
@@ -27,6 +24,24 @@ public class Assignment {
      private static void setLine(){
 
           // your code goes there
+
+          LinearRegression linearRegression = new LinearRegression(1000);
+
+          for (int i=0; i<1000; i++) {
+
+               linearRegression.addSample(i,i);
+               
+          }
+
+          Display graph = new Display(linearRegression);
+
+          for (int x=0; x<50; x++) {
+
+               linearRegression.gradientDescent(0.000000003, 100);
+               graph.update();
+
+          }
+          
 
      }
 

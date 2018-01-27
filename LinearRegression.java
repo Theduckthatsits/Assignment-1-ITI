@@ -54,7 +54,8 @@ public class LinearRegression {
  	public LinearRegression(int m){
 
  		// your code goes there
- 		// 
+
+ 		// Settings nbreOfSamples to m
  		this.nbreOfSamples=m;
 
  		// Initializing initial hypothesis
@@ -84,28 +85,28 @@ public class LinearRegression {
 		// your code goes there
 		// HAVE TO CLONE THE LIST 
 
-		// Variable newSize is initiated to the new length of lists sample and samplesValue (which are the same size)
+		// Variable newSize is initiated to the new length of arrays sample and samplesValue (which are the same size)
 		int newSize = samples.length+1;
 
-		// Creating new arrays of the new size and assigning them to the lists samples and samplesValues
+		// Creating new temporary arrays samples1 and samplesValues1 of the new size 
 		double[] samples1 = new double[newSize];
 		double[] samplesValues1 = new double[newSize];
 
-		// Copying the old array to the new temporary array
+		// Copying the old array to the new temporary arrays (samples1 and samplesValues1)
 		System.arraycopy(samples, 0, samples1, 0, samples.length);
 		System.arraycopy(samplesValues, 0, samplesValues1, 0, samplesValues.length);
 
 
-		// Adds the x and y values of the point passed to method addSample to the list samples and samplesValues respectively
+		// Adds the x and y values of the point passed to method addSample to the array samples1 and samplesValues1 respectively
 		samples1[newSize-1] = x;
 		samplesValues1[newSize-1] = y;
+
+		// Setting arrays samples and samplesValues to the new arrays with the new point values to arrays samples1 and samplesValues1 respectively
 		samples=samples1;
 		samplesValues=samplesValues1;
 
-
-
-
-
+		// Increasing currentNbreOfSamples by one
+		currentNbreOfSamples++;
 
 	}
 
@@ -118,7 +119,7 @@ public class LinearRegression {
 	private double hypothesis(double x){
 		// your code goes there
 
-		return theta0+theta1*x;
+		return theta0+(theta1*x);
 	}
 
 	/** 
@@ -153,6 +154,9 @@ public class LinearRegression {
 
 		// Returning the current cost of the function	
 		return (1/nbreOfSamples)*cost;
+
+
+
 		
 	}	
 
@@ -165,48 +169,45 @@ public class LinearRegression {
      */
 	public void gradientDescent(double alpha, int numberOfSteps) {
 
-
 		// your code goes there
 
-		// Variables...
-		double t0= 0;
+		// Variables t0, t1 and temp used for Gradient Descent Algorithm
+		double t0=0;
 		double t1=0;
 		double temp=0;
+
+		// Variable completedSteps used to keep track of how many steps have been performed
 		int completedSteps = 0;
 
+		// While loop used to iteratate the algorithm numberofSteps steps
 		while(completedSteps<numberOfSteps){
 
-			// Calculates the sum of (h◊(xi) - yi) for theta zero and ((h◊(xi) - yi)xi) for theta one
+			// For loop used to calculate the sum of (h◊(xi) - yi) for theta zero and ((h◊(xi) - yi)xi) for theta one
 			for (int i=0; i<nbreOfSamples; i++) {
 
+				// Variable used to calcualte (h◊(xi) - yi)
 				temp = hypothesis(samples[i])-samplesValues[i];
 
 				t0 += temp;
 
 				t1 += temp*samples[i];
 
+				// Updating the value of THETA ZERO
+				theta0 -= ((alpha*2)/nbreOfSamples)*t0;
+
+				// Updating the value of THETA ONE
+				theta1 -= ((alpha*2)/nbreOfSamples)*t1;
+
+				// Ressetting the value of temp to zero
 				temp = 0;
-				//iteration++;
 
 			}
 
-			// Updating the value of THETA ZERO
-			theta0 -= ((alpha*2)/nbreOfSamples)*t0;
-
-			// Updating the value of THETA ONE
-			theta1 -= ((alpha*2)/nbreOfSamples)*t1;
-
-			// Increasing the number of comnpleted steps
+			// Increasing the number of variables comnpletedSteps and iteration by one
 			completedSteps++;
 			iteration++;
 
 		}
-
-		
-
-
-
-
 
 	}
 

@@ -25,26 +25,36 @@ public class Assignment {
 
           // your code goes there
 
+          //Creating an instance of the class LinearRegression
           LinearRegression linearRegression = new LinearRegression(1000);
 
+          // For loop used to add 1000 samples to the instance linearRegression
           for (int i=0; i<1000; i++) {
 
                linearRegression.addSample(i,i);
                
           }
 
+          // Creating an instance of the class Display
           Display graph = new Display(linearRegression);
+
           //graph.setTarget(1,0); //Optional
 
+          // Foor loop used to iterate the algorithm GradientDescent a total of 5000 times
           for (int x=0; x<50; x++) {
+
+               // Updating the graph
+               graph.update(); // For some reason the program works without updating
                
-               System.out.println(linearRegression.currentCost());
+               // Calling method gradientDescent from instance linearRegression
                linearRegression.gradientDescent(0.000000003, 100);
-               graph.update();
+               
+               // Printing out the current hypothesis and cost
+               System.out.println("Current hypothesis: " + linearRegression.currentHypothesis());
+               System.out.println("Current cost: " + linearRegression.currentCost());
 
           }
           
-
      }
 
 

@@ -48,10 +48,10 @@ public class Assignment {
                
                // Calling method gradientDescent from instance linearRegression
                linearRegression.gradientDescent(0.000000003, 100);
-               
+               double cost = linearRegression.currentCost();
                // Printing out the current hypothesis and cost
                System.out.println("Current hypothesis: " + linearRegression.currentHypothesis());
-               System.out.println("Current cost: " + linearRegression.currentCost());
+               System.out.println("Current cost: " + cost );
 
           }
           

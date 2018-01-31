@@ -34,6 +34,40 @@ public class Assignment {
 
 		// your code goes there
 
+          LinearRegression linearRegression = new LinearRegression(500);
+          
+          Display display = new Display(linearRegression);
+
+          double a = generator.nextDouble()*200-100;
+          double b = generator.nextDouble()*500-250;
+
+          display.setTarget(a,b);
+
+          for (int i=0; i<500; i++) {
+
+               double x = generator.nextDouble()*400-100;
+               double noise = generator.nextDouble()*2000-1000;
+
+
+               linearRegression.addSample(x,(a*x)+b+noise);
+               
+          }
+
+          // Foor loop used to iterate the algorithm GradientDescent a total of 5000 times
+          for (int x=0; x<50; x++) {
+
+               // Updating the graph
+               display.update(); // For some reason the program works without updating
+               
+               // Calling method gradientDescent from instance linearRegression
+               linearRegression.gradientDescent(0.000000003, 100);
+               
+               // Printing out the current hypothesis and cost
+               System.out.println("Current hypothesis: " + linearRegression.currentHypothesis());
+               System.out.println("Current cost: " + linearRegression.currentCost());
+
+          }
+
 	}
 
 

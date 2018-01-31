@@ -62,9 +62,12 @@ public class LinearRegression {
  		theta0=0;
  		theta1=0;
 
- 		// Initializing the lists samples and samplesValues to lists of size 0
- 		samples = new double[0];
-		samplesValues = new double[0];
+ 		// Initializing the lists samples and samplesValues to lists of size nbreOfSamples
+ 		samples = new double[nbreOfSamples];
+		samplesValues = new double[nbreOfSamples];
+
+		//Initializing the variable currentNbreOfSamples to zero
+		currentNbreOfSamples=0;
 
 		// Initializing the number of iterations to zero
 		iteration=0;
@@ -83,30 +86,12 @@ public class LinearRegression {
 	public void addSample(double x, double y){
 
 		// your code goes there
-		// HAVE TO CLONE THE LIST 
 
-		// Variable newSize is initiated to the new length of arrays sample and samplesValue (which are the same size)
-		int newSize = samples.length+1;
-
-		// Creating new temporary arrays samples1 and samplesValues1 of the new size 
-		double[] samples1 = new double[newSize];
-		double[] samplesValues1 = new double[newSize];
-
-		// Copying the old array to the new temporary arrays (samples1 and samplesValues1)
-		System.arraycopy(samples, 0, samples1, 0, samples.length);
-		System.arraycopy(samplesValues, 0, samplesValues1, 0, samplesValues.length);
-
+		currentNbreOfSamples++;
 
 		// Adds the x and y values of the point passed to method addSample to the array samples1 and samplesValues1 respectively
-		samples1[newSize-1] = x;
-		samplesValues1[newSize-1] = y;
-
-		// Setting arrays samples and samplesValues to the new arrays with the new point values to arrays samples1 and samplesValues1 respectively
-		samples=samples1;
-		samplesValues=samplesValues1;
-
-		// Increasing currentNbreOfSamples by one
-		currentNbreOfSamples++;
+		samples[currentNbreOfSamples-1] = x;
+		samplesValues[currentNbreOfSamples-1] = y;
 
 	}
 

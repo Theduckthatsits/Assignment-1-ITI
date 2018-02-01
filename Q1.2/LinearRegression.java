@@ -138,11 +138,8 @@ public class LinearRegression {
 		}
 
 		// Returning the current cost of the function	
-		return (1/nbreOfSamples)*cost;
+		return (1.0/nbreOfSamples)*cost;
 
-
-
-		
 	}	
 
 	/** 
@@ -191,7 +188,6 @@ public class LinearRegression {
 			// Increasing the number of variables comnpletedSteps and iteration by one
 			completedSteps++;
 			iteration++;
-			currentCost();
 
 		}
 

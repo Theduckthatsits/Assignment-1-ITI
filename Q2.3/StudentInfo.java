@@ -16,10 +16,10 @@ public class StudentInfo {
     public static void display() {
 
 	System.out.println("************************************************************");
-	System.out.println("*                                                          *");
-	System.out.println("*                                                          *");
-	System.out.println("*                                                          *");
-	System.out.println("*                                                          *");
+	System.out.println("* Said Ghamra - Andrew Dzierzanowski	                   *");
+	System.out.println("* 300008217 -  300002426                                   *");
+	System.out.println("* ITI1121B                                                 *");
+	System.out.println("* Assignment #1                                            *");
 	System.out.println("************************************************************");
 	System.out.println();
 

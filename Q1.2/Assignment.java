@@ -54,13 +54,13 @@ public class Assignment {
           }
 
           // Foor loop used to iterate the algorithm GradientDescent a total of 5000 times
-          for (int x=0; x<50; x++) {
+          for (int x=0; x<100; x++) {
 
                // Updating the graph
                display.update(); // For some reason the program works without updating
                
                // Calling method gradientDescent from instance linearRegression
-               linearRegression.gradientDescent(0.000000003, 100);
+               linearRegression.gradientDescent(0.00000003, 100);
                
                // Printing out the current hypothesis and cost
                System.out.println("Current hypothesis: " + linearRegression.currentHypothesis());

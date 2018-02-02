@@ -65,6 +65,29 @@ public class LinearRegression{
 
 		// your code goes there
 
+		// Initializing the variables nbreOfFeatures and nbreOfSamples to variables n and m respectively
+		this.nbreOfFeatures=n;
+		this.nbreOfSamples=m;
+		
+		// Initializing the variables iteration, currentNbreOfSamples and tempTheta to zero
+		iteration=0;
+		currentNbreOfSamples=0;
+
+		// Initializing array theta to to a double array of size n
+		theta = new double[n];
+
+		// Initializing arrays samplesMatrix and samplesValues to arrays of size n
+		samplesMatrix=new double[nbreOfSamples][2];
+		samplesValues=new double[nbreOfSamples];
+
+		// For loop used to initiate the value of theta's to zero in array theta
+		for (int i=0; i<theta.length; i++) {
+
+			theta[i]=0;
+			tempTheta[i]=0;
+			
+		}
+
 	}
 
 	/** 
@@ -77,6 +100,14 @@ public class LinearRegression{
 	public void addSample(double[] x, double y){
 
 		// your code goes there
+
+		// Increasing the current number of samples by one
+		currentNbreOfSamples++;
+
+		// Adding new sample to samplesMatrix and samplesValues
+		samplesMatrix[currentNbreOfSamples-1][0]=x[0];
+		samplesMatrix[currentNbreOfSamples-1][1]=x[1];
+		samplesValues[currentNbreOfSamples-1]=y;
 
 	}
 
@@ -115,6 +146,19 @@ public class LinearRegression{
 
 		// your code goes there
 
+		double cost =0;
+
+		for (int i=0; i<nbreOfSamples; i++) {
+
+			cost += Math.pow(hypothesis(samplesMatrix[i])-samplesValues[i],2);
+			
+		}
+
+		return (1.0/nbreOfSamples)*cost;
+
+
+
+
 	}
 
 	/** 
@@ -130,6 +174,32 @@ public class LinearRegression{
 
 		// your code goes there
 
+		// Variable completedSteps used to keep track of how many steps have been performed
+		int completedSteps = 0;
+
+		// double temp used to store the sum
+		double temp = 0;
+
+		while(completedSteps<numberOfSteps){
+
+			for (int i=0; i<nbreOfSamples; i++) {
+
+				temp+= (hypothesis(samplesMatrix[i])-samplesValues[i])*xj;
+				
+			}
+
+			for (int x=0; x<nbreOfSamples; x++) {
+
+				theta[x] -= ((alpha*2)/nbreOfSamples)*temp;
+				
+			}
+
+			// Increasing the number of variables comnpletedSteps and iteration by one
+			
+			completedSteps++;
+			iteration++;
+		}
+		
 	}
 
 
@@ -143,6 +213,8 @@ public class LinearRegression{
 
 		// your code goes there
 
+		return theta;
+
 	}
 
 	/** 
@@ -154,6 +226,8 @@ public class LinearRegression{
 	public int getIteration(){
 
 		// your code goes there
+
+		return iteration;
 
 	}
 }

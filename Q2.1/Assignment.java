@@ -57,8 +57,8 @@ public class Assignment {
             linearRegression.gradientDescent(0.000000003,1000);
 
             // Printing out curent hypothesis and cost
-            System.out.println("Hypothesis: "+linearRegression.currrentHypothesis);
-            System.out.println("Cost: "+linearRegression.currentCost);
+            //System.out.println("Hypothesis: "+linearRegression.currrentHypothesis());
+            System.out.println("Cost: "+linearRegression.currentCost());
             
         }
 

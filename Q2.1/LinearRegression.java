@@ -5,7 +5,7 @@
  * @author gvj (gvj@eecs.uottawa.ca)
  *
  */
-
+// http://www.holehouse.org/mlclass/04_Linear_Regression_with_multiple_variables.html	
 public class LinearRegression{
 
 
@@ -74,14 +74,17 @@ public class LinearRegression{
 		currentNbreOfSamples=0;
 
 		// Initializing array theta to to a double array of size n
-		theta = new double[n];
+		theta = new double[nbreOfFeatures];
+		tempTheta = new double[nbreOfFeatures];
+		theta[0]=1;
+		tempTheta[0]=1;
 
 		// Initializing arrays samplesMatrix and samplesValues to arrays of size n
-		samplesMatrix=new double[nbreOfSamples][2];
+		samplesMatrix=new double[nbreOfSamples][nbreOfFeatures];
 		samplesValues=new double[nbreOfSamples];
 
 		// For loop used to initiate the value of theta's to zero in array theta
-		for (int i=0; i<theta.length; i++) {
+		for (int i=1; i<theta.length; i++) {
 
 			theta[i]=0;
 			tempTheta[i]=0;
@@ -134,6 +137,26 @@ public class LinearRegression{
 
 		// your code goes there
 
+		String temp = new String("");
+
+		for (int i=0; i<theta.length; i++) {
+
+			if (i==(theta.length-1)) {
+
+				temp+= theta[i] + "x";
+				
+			}
+
+			else () {
+
+				temp+= theta[i] + "x + ";
+
+			}
+			
+		}
+
+		return temp;
+
 	}
 
 	/** 
@@ -146,7 +169,7 @@ public class LinearRegression{
 
 		// your code goes there
 
-		double cost =0;
+		double cost=0;
 
 		for (int i=0; i<nbreOfSamples; i++) {
 
@@ -188,7 +211,7 @@ public class LinearRegression{
 				
 			}
 
-			for (int x=0; x<nbreOfSamples; x++) {
+			for (int x=0; x<nbreOfFeatures; x++) {
 
 				theta[x] -= ((alpha*2)/nbreOfSamples)*temp;
 				

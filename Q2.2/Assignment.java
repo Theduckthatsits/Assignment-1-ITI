@@ -27,9 +27,30 @@ public class Assignment {
      * iterations, using a step alpha of 0.000000003
      */
     private static void setPlane(){
+          LinearRegression linearRegression = new LinearRegression;
+          for (int i=0; i<1000; i++) {
 
-		// your code goes there
+              double[] temp = new double[]{1,i*1.0,i*2.0};
 
+              linearRegression.addSample(temp,5.0*i);
+            
+          }
+          for (int x=0; x<1000; x++) {
+
+              double[] temp = new double[]{1,x*2.0,x*1.0};
+
+              linearRegression.addSample(temp,4.0*x);
+            
+          }
+	    // Gradient Descent Algorithm iterated 10,000 times in total
+          for (int z=0; z<10; z++) {
+            
+               linearRegression.gradientDescent(0.000000003,1000);
+
+            // Printing out the curent hypothesis and cost
+               System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
+               System.out.println("Cost: "+linearRegression.currentCost()); 
+          }
 	}
 
 	/** 
@@ -49,8 +70,17 @@ public class Assignment {
      */
 
 	private static void randomPlane(){
+          double a = generator.nextDouble()*200-100;
+          double b = generator.nextDouble()*200-100;
+          double c = generator.nextDouble()*200-100;
+          for (int i=0; i<1000; i++) {
 
-		// your code goes there
+              double[] temp = new double[]{1,i*1.0,i*2.0};
+
+              linearRegression.addSample(temp,5.0*i);
+            
+          }
+	
 
 	}
 

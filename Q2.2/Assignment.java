@@ -28,17 +28,6 @@ public class Assignment {
      */
     private static void setPlane(){
 
-	    // Gradient Descent Algorithm iterated 10,000 times in total
-          for (int z=0; z<10; z++) {
-            
-               linearRegression.gradientDescent(0.000000003,1000);
-
-            // Printing out the curent hypothesis and cost
-               System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
-               System.out.println("Cost: "+linearRegression.currentCost()); 
-          }
-
-
 		// your code goes there
 
           // Creating an instance of the class LinearRegression
@@ -70,7 +59,9 @@ public class Assignment {
           // Printing out the curent hypothesis and cost
           System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
           System.out.println("Cost: "+linearRegression.currentCost());
+            
         }
+
 	}
 
 	/** 
@@ -91,11 +82,16 @@ public class Assignment {
 
 	private static void randomPlane(){
 
+		// your code goes there
+
+          LinearRegression linearRegression = new LinearRegression(2,5000);
+
           // Double a, b and c are randomly generated between -100 and +100
           double a = generator.nextDouble()*200-100;
           double b = generator.nextDouble()*200-100;
           double c = generator.nextDouble()*200-100;
 
+          // For loop used to add 
           for (int i=0; i<5000; i++) {
 
                // Doubles x and y randomly generated between 50 and 4000
@@ -115,13 +111,15 @@ public class Assignment {
 
 
           // Gradient Descent Algorithm iterated  times in total
-          for (int z=0; z<; z++) {
+          for (int z=0; z<10; z++) {
 
-               linearRegression.gradientDescent(,);
+               linearRegression.gradientDescent(0.000000003,1000);
 
                // Printing out the curent hypothesis and cost
                System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
                System.out.println("Cost: "+linearRegression.currentCost());
+               System.out.println("Target: "+a+"x_0 + "+b+"x_1 + "+c+"x_2");
+               System.out.println();
             
         }
 

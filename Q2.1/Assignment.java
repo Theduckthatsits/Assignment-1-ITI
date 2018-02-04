@@ -54,11 +54,14 @@ public class Assignment {
         // Gradient Descent Algorithm iterated 10,000 times in total
         for (int z=0; z<10; z++) {
             
-            linearRegression.gradientDescent(0.000000003,1000);
-
             // Printing out the curent hypothesis and cost
             System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
             System.out.println("Cost: "+linearRegression.currentCost());
+
+            // Gradient Descent
+            linearRegression.gradientDescent(0.000000003,1000);
+
+            
             
         }
 

@@ -5,7 +5,7 @@
  * @author gvj (gvj@eecs.uottawa.ca)
  *
  */
-
+// http://www.holehouse.org/mlclass/04_Linear_Regression_with_multiple_variables.html	
 public class LinearRegression{
 
 
@@ -65,6 +65,30 @@ public class LinearRegression{
 
 		// your code goes there
 
+		// Initializing the variables nbreOfFeatures and nbreOfSamples to variables n+1 and m respectively
+		nbreOfFeatures=n+1;
+		nbreOfSamples=m;
+		
+		// Initializing the variables iteration, currentNbreOfSamples
+		iteration=0;
+		currentNbreOfSamples=0;
+
+		// Initializing array theta and tempTheta to to a double array of size n(nbreOfFeatures)
+		theta = new double[nbreOfFeatures];
+		tempTheta = new double[nbreOfFeatures];
+
+		// Initializing arrays samplesMatrix and samplesValues to arrays of size [nbreOfSamples][nbreOfFeatures] and [nbreOfSamples] respectively
+		samplesMatrix=new double[nbreOfSamples][nbreOfFeatures];
+		samplesValues=new double[nbreOfSamples];
+
+		// For loop used to initiate the value of theta's to zero in arrays theta and tempTheta
+		for (int i=1; i<theta.length; i++) {
+
+			theta[i]=0;
+			tempTheta[i]=0;
+			
+		}
+
 	}
 
 	/** 
@@ -77,6 +101,16 @@ public class LinearRegression{
 	public void addSample(double[] x, double y){
 
 		// your code goes there
+
+		// Increasing the current number of samples by one
+		
+
+		// Adding the new sample point to samplesMatrix and samplesValues
+		samplesMatrix[currentNbreOfSamples]=x;
+		samplesValues[currentNbreOfSamples]=y;
+
+		// Increasing the number of currentNbreOfSamples by 1
+		currentNbreOfSamples++;
 
 	}
 
@@ -91,6 +125,19 @@ public class LinearRegression{
 
 		// your code goes there
 
+		// Double temp used to calculate the value of the current hypothesis
+		double temp=0;
+
+		// For loop used to calculate the hypothesis
+		for (int i=0; i<nbreOfFeatures; i++) {
+
+			temp+=theta[i]*x[i];
+			
+		}
+
+		// Returning the value of the current hypothesis
+		return temp;
+
 	}
 
 	/** 
@@ -103,6 +150,9 @@ public class LinearRegression{
 
 		// your code goes there
 
+		// CHAGNE LATER
+		return theta[0] + "x_0 + " + theta[1] + "x_1 + " + theta[2] + "x_2";
+
 	}
 
 	/** 
@@ -114,6 +164,19 @@ public class LinearRegression{
 	public double currentCost(){
 
 		// your code goes there
+
+		// Double cost used to store the value of the calculated cost
+		double cost=0;
+
+		// For loop used to calculate the current cost
+		for (int i=0; i<nbreOfSamples; i++) {
+
+			cost += Math.pow(hypothesis(samplesMatrix[i])-samplesValues[i],2);
+			
+		}
+
+		// Returning the cost
+		return (1.0/nbreOfSamples)*cost;
 
 	}
 
@@ -130,6 +193,33 @@ public class LinearRegression{
 
 		// your code goes there
 
+		// For loops used to calculate gradient Descent
+		for (int s=0; s<numberOfSteps; s++) {
+			double [] sum = new double[nbreOfFeatures];
+
+			for (int j=0; j<nbreOfFeatures; j++) {
+
+				for (int i=0; i<nbreOfSamples; i++) {
+
+					sum[j]+= (hypothesis(samplesMatrix[i])-samplesValues[i])*samplesMatrix[i][j];
+					
+				}
+
+				// Storing the new calculated values of theta in array tempTheta
+				tempTheta[j]-=((alpha*2.0)/nbreOfSamples)*sum[j];
+			}
+
+			// For loop used to assig the new values of theta stored in array tempTheta to the array theta
+			for (int th=0; th<theta.length; th++) {
+
+				theta[th] = tempTheta[th];
+				
+			}
+
+			// Increasing the number of iteration by one
+			iteration++;
+		}
+		
 	}
 
 
@@ -143,6 +233,8 @@ public class LinearRegression{
 
 		// your code goes there
 
+		return theta;
+
 	}
 
 	/** 
@@ -154,6 +246,8 @@ public class LinearRegression{
 	public int getIteration(){
 
 		// your code goes there
+
+		return iteration;
 
 	}
 }

@@ -84,6 +84,7 @@ public class Assignment {
 
 		// your code goes there
 
+          // Creating an instance of the class LinearRegression
           LinearRegression linearRegression = new LinearRegression(2,5000);
 
           // Double a, b and c are randomly generated between -100 and +100
@@ -91,7 +92,7 @@ public class Assignment {
           double b = generator.nextDouble()*200-100;
           double c = generator.nextDouble()*200-100;
 
-          // For loop used to add 
+          // For loop used to add 5000 sample points
           for (int i=0; i<5000; i++) {
 
                // Doubles x and y randomly generated between 50 and 4000
@@ -101,25 +102,28 @@ public class Assignment {
                // double noise randomly generated between -20 and 20
                double noise = generator.nextDouble()*40-20;
 
+               // Doubles temp and temp2 are used to hold the values of the sample point
                double[] temp = new double[]{1,x,y};
                double temp2 = (a*x)+(b*y)+c+noise;
 
+               // Adding the sample point to linearRegression
                linearRegression.addSample(temp,temp2);
                
           }
 
-
-
           // Gradient Descent Algorithm iterated  times in total
           for (int z=0; z<10; z++) {
 
-               linearRegression.gradientDescent(0.000000003,1000);
-
-               // Printing out the curent hypothesis and cost
+               // Printing out the curent hypothesis, cost and target
                System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
                System.out.println("Cost: "+linearRegression.currentCost());
-               System.out.println("Target: "+a+"x_0 + "+b+"x_1 + "+c+"x_2");
+               System.out.println("Target: "+c+"x_0 + "+a+"x_1 + "+b+"x_2");
                System.out.println();
+
+               // Gradient Descent
+               linearRegression.gradientDescent(0.000000003,1000);
+
+               
             
         }
 

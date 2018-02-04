@@ -143,6 +143,49 @@ public class Assignment {
 
 		// your code goes there
 
+          // Creating an instance of the class LinearRegression
+          LinearRegression linearRegression = new LinearRegression(dimension,5000);
+
+          // Double Array t used to hold the values of t
+          double[] t = new double[dimension];
+
+          // For loop used to generatae random values of t
+          for (int i=0; i<t.length; i++) {
+
+               t[i]=generator.nextDouble()*200-100;
+
+          }
+
+          // Double Array used to hold the values of x
+          double[] x = new double[dimension];
+          x[0]=1;
+
+          // For loop used to generate random values of x
+          for (int i=0; i<5000; i++) {
+
+               for (int j=1; j<t.length; j++) {
+
+                    x[i]=generator.nextDouble()*3950+50;
+
+               }
+
+               // Double temp used to calculate the value of r
+               double r=0;
+
+               // For loop used to calculate r
+               for (int k=0; i<dimension; i++) {
+
+                    r+=t[k]*x[k];
+               }
+
+               double noise = generator.nextDouble()*40-20;
+
+               linearRegression.addSample(x,r+noise);
+
+          }
+
+
+
 	}
 
 
@@ -152,6 +195,7 @@ public class Assignment {
 
 		System.out.println("randomDimension");
 		randomDimension(50);
+
 
 
 	}

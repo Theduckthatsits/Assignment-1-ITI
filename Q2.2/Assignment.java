@@ -99,11 +99,11 @@ public class Assignment {
           for (int i=0; i<5000; i++) {
 
                // Doubles x and y randomly generated between 50 and 4000
-               double x = generator.nextDouble()*-;
-               double y = generator.nextDouble()*-;
+               double x = generator.nextDouble()*3950+50;
+               double y = generator.nextDouble()*3950+50;
 
                // double noise randomly generated between -20 and 20
-               double noise = generator.nextDouble()*-;
+               double noise = generator.nextDouble()*40-20;
 
                double[] temp = new double[]{1,x,y};
                double temp2 = (a*x)+(b*y)+c+noise;

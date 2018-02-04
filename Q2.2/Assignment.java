@@ -122,11 +122,7 @@ public class Assignment {
 
                // Gradient Descent
                linearRegression.gradientDescent(0.000000003,1000);
-
-               
-            
         }
-
 	}
 
 

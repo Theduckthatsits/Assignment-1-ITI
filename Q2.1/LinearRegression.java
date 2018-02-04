@@ -65,25 +65,23 @@ public class LinearRegression{
 
 		// your code goes there
 
-		// Initializing the variables nbreOfFeatures and nbreOfSamples to variables n and m respectively
-		this.nbreOfFeatures=n;
-		this.nbreOfSamples=m;
+		// Initializing the variables nbreOfFeatures and nbreOfSamples to variables n+1 and m respectively
+		nbreOfFeatures=n+1;
+		nbreOfSamples=m;
 		
-		// Initializing the variables iteration, currentNbreOfSamples and tempTheta to zero
+		// Initializing the variables iteration, currentNbreOfSamples
 		iteration=0;
 		currentNbreOfSamples=0;
 
-		// Initializing array theta to to a double array of size n
+		// Initializing array theta and tempTheta to to a double array of size n(nbreOfFeatures)
 		theta = new double[nbreOfFeatures];
 		tempTheta = new double[nbreOfFeatures];
-		theta[0]=1;
-		tempTheta[0]=1;
 
-		// Initializing arrays samplesMatrix and samplesValues to arrays of size n
+		// Initializing arrays samplesMatrix and samplesValues to arrays of size [nbreOfSamples][nbreOfFeatures] and [nbreOfSamples] respectively
 		samplesMatrix=new double[nbreOfSamples][nbreOfFeatures];
 		samplesValues=new double[nbreOfSamples];
 
-		// For loop used to initiate the value of theta's to zero in array theta
+		// For loop used to initiate the value of theta's to zero in arrays theta and tempTheta
 		for (int i=1; i<theta.length; i++) {
 
 			theta[i]=0;
@@ -105,12 +103,14 @@ public class LinearRegression{
 		// your code goes there
 
 		// Increasing the current number of samples by one
-		currentNbreOfSamples++;
+		
 
-		// Adding new sample to samplesMatrix and samplesValues
-		samplesMatrix[currentNbreOfSamples-1][0]=x[0];
-		samplesMatrix[currentNbreOfSamples-1][1]=x[1];
-		samplesValues[currentNbreOfSamples-1]=y;
+		// Adding the new sample point to samplesMatrix and samplesValues
+		samplesMatrix[currentNbreOfSamples]=x;
+		samplesValues[currentNbreOfSamples]=y;
+
+		// Increasing the number of currentNbreOfSamples by 1
+		currentNbreOfSamples++;
 
 	}
 
@@ -125,6 +125,19 @@ public class LinearRegression{
 
 		// your code goes there
 
+		// Double temp used to calculate the value of the current hypothesis
+		double temp=0;
+
+		// For loop used to calculate the hypothesis
+		for (int i=0; i<nbreOfFeatures; i++) {
+
+			temp+=theta[i]*x[i];
+			
+		}
+
+		// Returning the value of the current hypothesis
+		return temp;
+
 	}
 
 	/** 
@@ -137,25 +150,8 @@ public class LinearRegression{
 
 		// your code goes there
 
-		String temp = new String("");
-
-		for (int i=0; i<theta.length; i++) {
-
-			if (i==(theta.length-1)) {
-
-				temp+= theta[i] + "x";
-				
-			}
-
-			else () {
-
-				temp+= theta[i] + "x + ";
-
-			}
-			
-		}
-
-		return temp;
+		// CHAGNE LATER
+		return theta[0] + "x_0 + " + theta[1] + "x_1 + " + theta[2] + "x_2";
 
 	}
 
@@ -169,18 +165,18 @@ public class LinearRegression{
 
 		// your code goes there
 
+		// Double cost used to store the value of the calculated cost
 		double cost=0;
 
+		// For loop used to calculate the current cost
 		for (int i=0; i<nbreOfSamples; i++) {
 
 			cost += Math.pow(hypothesis(samplesMatrix[i])-samplesValues[i],2);
 			
 		}
 
+		// Returning the cost
 		return (1.0/nbreOfSamples)*cost;
-
-
-
 
 	}
 
@@ -197,29 +193,30 @@ public class LinearRegression{
 
 		// your code goes there
 
-		// Variable completedSteps used to keep track of how many steps have been performed
-		int completedSteps = 0;
+		// For loops used to calculate gradient Descent
+		for (int s=0; s<numberOfSteps; s++) {
+			double [] sum = new double[nbreOfFeatures];
 
-		// double temp used to store the sum
-		double temp = 0;
+			for (int j=0; j<nbreOfFeatures; j++) {
 
-		while(completedSteps<numberOfSteps){
+				for (int i=0; i<nbreOfSamples; i++) {
 
-			for (int i=0; i<nbreOfSamples; i++) {
+					sum[j]+= (hypothesis(samplesMatrix[i])-samplesValues[i])*samplesMatrix[i][j];
+					
+				}
 
-				temp+= (hypothesis(samplesMatrix[i])-samplesValues[i])*xj;
+				// Storing the new calculated values of theta in array tempTheta
+				tempTheta[j]-=((alpha*2.0)/nbreOfSamples)*sum[j];
+			}
+
+			// For loop used to assig the new values of theta stored in array tempTheta to the array theta
+			for (int th=0; th<theta.length; th++) {
+
+				theta[th] = tempTheta[th];
 				
 			}
 
-			for (int x=0; x<nbreOfFeatures; x++) {
-
-				theta[x] -= ((alpha*2)/nbreOfSamples)*temp;
-				
-			}
-
-			// Increasing the number of variables comnpletedSteps and iteration by one
-			
-			completedSteps++;
+			// Increasing the number of iteration by one
 			iteration++;
 		}
 		

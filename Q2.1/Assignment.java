@@ -36,7 +36,7 @@ public class Assignment {
         // For loop used to add first 1000 points ((x, 2x), 5x)
         for (int i=0; i<1000; i++) {
 
-            double[] temp = new double[]{i*1.0,i*2.0};
+            double[] temp = new double[]{1,i*1.0,i*2.0};
 
             linearRegression.addSample(temp,5.0*i);
             
@@ -45,19 +45,19 @@ public class Assignment {
         // For loop used to add the other 1000 points ((2x, x), 4x)
         for (int x=0; x<1000; x++) {
 
-            double[] temp = new double[]{x*2.0,x*1.0};
+            double[] temp = new double[]{1,x*2.0,x*1.0};
 
             linearRegression.addSample(temp,4.0*x);
             
         }
 
-        // Gradient Descent Algorithm iterated 10,000 times
+        // Gradient Descent Algorithm iterated 10,000 times in total
         for (int z=0; z<10; z++) {
             
             linearRegression.gradientDescent(0.000000003,1000);
 
-            // Printing out curent hypothesis and cost
-            //System.out.println("Hypothesis: "+linearRegression.currrentHypothesis());
+            // Printing out the curent hypothesis and cost
+            System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
             System.out.println("Cost: "+linearRegression.currentCost());
             
         }

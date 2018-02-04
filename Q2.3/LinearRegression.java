@@ -66,7 +66,7 @@ public class LinearRegression{
 		// your code goes there
 
 		// Initializing the variables nbreOfFeatures and nbreOfSamples to variables n+1 and m respectively
-		nbreOfFeatures=n+1;
+		nbreOfFeatures=n;
 		nbreOfSamples=m;
 		
 		// Initializing the variables iteration, currentNbreOfSamples
@@ -167,7 +167,7 @@ public class LinearRegression{
 
 			// For any theta besides theta zero
 			else {
-				temp+=" + "+theta[i]+"x_"+i;
+				temp+=" + "+theta[i]+"x_"+(i+1);
 			}
 		}
 		// Returning the string representation of hypothesis

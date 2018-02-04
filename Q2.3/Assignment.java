@@ -110,7 +110,7 @@ public class Assignment {
                
           }
 
-          // Gradient Descent Algorithm iterated  times in total
+          // Gradient Descent Algorithm iterated 10,000 times in total
           for (int z=0; z<10; z++) {
 
                // Printing out the curent hypothesis, cost and target
@@ -149,7 +149,7 @@ public class Assignment {
           // Double Array t used to hold the values of t
           double[] t = new double[dimension];
 
-          // For loop used to generatae random values of t
+          // For loop used to generate random values of t
           for (int i=0; i<t.length; i++) {
 
                t[i]=generator.nextDouble()*200-100;
@@ -160,12 +160,13 @@ public class Assignment {
           double[] x = new double[dimension];
           x[0]=1;
 
-          // For loop used to generate random values of x
+          // For loop used to generate random values of x, calculate r and add sample points to linearRegression
           for (int i=0; i<5000; i++) {
 
+               // For loop generates random values of x and stores them in the array x
                for (int j=1; j<t.length; j++) {
 
-                    x[i]=generator.nextDouble()*3950+50;
+                    x[j]=generator.nextDouble()*3950+50;
 
                }
 
@@ -178,13 +179,47 @@ public class Assignment {
                     r+=t[k]*x[k];
                }
 
+               // Double noise used to generate a random value of noise between -20 and 20
                double noise = generator.nextDouble()*40-20;
 
+               // Adding the sample point to linearRegression
                linearRegression.addSample(x,r+noise);
 
           }
 
+          // Gradient Descent Algorithm iterated 10,000 times in total
+          for (int z=0; z<10; z++) {
 
+               // Printing out the curent hypothesis, cost and target
+               System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
+               System.out.println("Cost: "+linearRegression.currentCost());
+
+               // Variable trgt used to store the string representation of the target
+               String trgt = "";
+
+               // For loop used to return the string representation of the target
+               for (int s=0; s<t.length; s++) {
+
+                    if (s==0) {
+
+                         trgt+=t[s] + "x_0";
+                         
+                    }
+
+                    else {
+
+                         trgt+= " + " + t[s] + "x_" + (s+1) ;
+                         
+                    }
+                    
+               }
+
+               System.out.println("Target: "+trgt);
+               System.out.println();
+
+               // Gradient Descent
+               linearRegression.gradientDescent(0.000000003,1000);
+          }
 
 	}
 

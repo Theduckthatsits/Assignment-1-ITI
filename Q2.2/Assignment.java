@@ -27,6 +27,7 @@ public class Assignment {
      * iterations, using a step alpha of 0.000000003
      */
     private static void setPlane(){
+<<<<<<< HEAD
           LinearRegression linearRegression = new LinearRegression;
           for (int i=0; i<1000; i++) {
 
@@ -51,6 +52,43 @@ public class Assignment {
                System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
                System.out.println("Cost: "+linearRegression.currentCost()); 
           }
+=======
+
+		// your code goes there
+
+          // Creating an instance of the class LinearRegression
+          LinearRegression linearRegression = new LinearRegression(2,2000);
+
+          // For loop used to add first 1000 points ((x, 2x), 5x)
+          for (int i=0; i<1000; i++) {
+
+               double[] temp = new double[]{1,i*1.0,i*2.0};
+
+               linearRegression.addSample(temp,5.0*i);
+            
+        }
+
+        // For loop used to add the other 1000 points ((2x, x), 4x)
+        for (int x=0; x<1000; x++) {
+
+          double[] temp = new double[]{1,x*2.0,x*1.0};
+
+          linearRegression.addSample(temp,4.0*x);
+            
+        }
+
+        // Gradient Descent Algorithm iterated 10,000 times in total
+        for (int z=0; z<10; z++) {
+
+          linearRegression.gradientDescent(0.000000003,1000);
+
+          // Printing out the curent hypothesis and cost
+          System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
+          System.out.println("Cost: "+linearRegression.currentCost());
+            
+        }
+
+>>>>>>> 02913582f17c45e9f206ba1de172329eefa28b52
 	}
 
 	/** 
@@ -81,6 +119,40 @@ public class Assignment {
             
           }
 	
+
+          // Double a, b and c are randomly generated between -100 and +100
+          double a = generator.nextDouble()*200-100;
+          double b = generator.nextDouble()*200-100;
+          double c = generator.nextDouble()*200-100;
+
+          for (int i=0; i<5000; i++) {
+
+               // Doubles x and y randomly generated between 50 and 4000
+               double x = generator.nextDouble()*-;
+               double y = generator.nextDouble()*-;
+
+               // double noise randomly generated between -20 and 20
+               double noise = generator.nextDouble()*-;
+
+               double[] temp = new double[]{1,x,y};
+               double temp2 = (a*x)+(b*y)+c+noise;
+
+               linearRegression.addSample(temp,temp2);
+               
+          }
+
+
+
+          // Gradient Descent Algorithm iterated  times in total
+          for (int z=0; z<; z++) {
+
+               linearRegression.gradientDescent(,);
+
+               // Printing out the curent hypothesis and cost
+               System.out.println("Hypothesis: "+linearRegression.currentHypothesis());
+               System.out.println("Cost: "+linearRegression.currentCost());
+            
+        }
 
 	}
 
